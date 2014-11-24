@@ -12,3 +12,5 @@ meteorhacks:npm
 
 npm-container
 underscore
+cfs:http-methods
+

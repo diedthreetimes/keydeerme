@@ -78,6 +78,19 @@ Meteor.methods({
     }
 });
 
+if (Meteor.isServer) {
+    HTTP.methods({
+	'api/random': function(data) {
+	    this.setContentType('text/json');
+	    this.addHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
+	    this.addHeader("Pragma", "no-cache"); // HTTP 1.0.
+	    this.addHeader("Expires", 0); // Proxies.
+
+	    return '{ "url":"'+ randomImageIndexed() +'"}';
+	}
+    });
+}
+
 if (Meteor.isClient) {
   Meteor.startup(function() {
       // Could save one round trip by loading the background in the first round
@@ -100,16 +113,10 @@ if (Meteor.isClient) {
     }
   });
 
-  Template.tempbutton.events({
-    'click button': function() {
-	$('body').css("background-image", "url( "+randomImage()+")");
-
-	Session.set("counter", Session.get("counter") + 1);
-    }
-  });
-
   Template.moredeer.events({
     'click button': function () {
+
+	/* this is significantly slower 
 	Meteor.call("randomImageMethod", function(error,result) {
 	  if(error){
 	      $('body').css("background-image", "url( "+randomImage()+")");
@@ -117,8 +124,9 @@ if (Meteor.isClient) {
 	      $('body').css("background-image", "url("+result+")");
 	  }
 	});
+	*/
 
-	// $('body').css("background-image", "url( "+randomImage()+")");
+	$('body').css("background-image", "url( "+randomImage()+")");
 
 	// increment the counter when button is clicked
 	Session.set("counter", Session.get("counter") + 1);

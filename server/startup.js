@@ -26,14 +26,20 @@ var each_image = function(image) {
     }
 }
 
+function scrape() {
+    Images.remove({})
+    console.log("About to call scrapper");
+    new Scraper(Meteor.settings.upload_directory, each_image);
+}
+
 Meteor.startup(function() {
     var daily = new Cron(function() {
-	// TODO: Remove this after testing
-	Images.remove({})
-	console.log("About to call scrapper");
-	new Scraper(Meteor.settings.upload_directory, each_image);
+	scrape();
     }, {
-	hour: 2,
-	minute: 41
+	hour: 14,
+	minute: 35
     });
+
+    // This will call way to frequently, uncomment to run immediatly then recomment
+    //scrape();
 });
