@@ -5,4 +5,10 @@
 
 meteor-platform
 autopublish
-insecure
+chfritz:easycron
+http
+meteorhacks:npm
+
+
+npm-container
+underscore
