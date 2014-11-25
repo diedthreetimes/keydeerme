@@ -3,5 +3,7 @@ body {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  background: no-repeat fixed center center;    
+  background-attachment: fixed;
+  background-position: center center;
+  background-repeat: no-repeat; 
 }

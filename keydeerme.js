@@ -5,7 +5,7 @@ if (Meteor.isServer) {
     Images._ensureIndex( {random: 1} );
 }
 
-var PREFER_ORIG = false
+var PREFER_ORIG = true
 function maxResUrl(image) {
     url = image.url
 
