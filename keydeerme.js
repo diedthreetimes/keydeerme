@@ -87,6 +87,19 @@ if (Meteor.isServer) {
 	    this.addHeader("Expires", 0); // Proxies.
 
 	    return '{ "url":"'+ randomImageIndexed() +'"}';
+	},
+
+	'api/random.jpg': function(data) {
+	    this.setContentType('text/html');
+	    this.addHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
+	    this.addHeader("Pragma", "no-cache"); // HTTP 1.0.
+	    this.addHeader("Expires", 0); // Proxies.
+
+	    this.addHeader("Location", randomImageIndexed());
+	    this.setStatusCode(303)
+
+
+	    return "";
 	}
     });
 }
