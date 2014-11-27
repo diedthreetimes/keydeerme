@@ -4,9 +4,6 @@
 meteor build .
 scp keydeerme.tar.gz keydeer.me:~
 # The way we move the bundle probably kills any seamless deploy. 
-#  There must be a better way
-#  Maybe look at : https://github.com/arunoda/meteor-up ?
-#  Also of potential interest is https://github.com/onmodulus/demeteorizer.
 #  This seems to require a change in how meteor is served.
 ssh keydeer.me 'tar -zxf keydeerme.tar.gz; rm -rf /var/www/keydeer.me; mv bundle /var/www/keydeer.me; cd /var/www/keydeer.me/programs/server && npm install; cd ../../; mkdir tmp; mv programs/web.browser/app public; touch tmp/restart.txt'
 
